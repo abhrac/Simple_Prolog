@@ -73,3 +73,13 @@ swap(L, I1, I2, OUT):-
 	replace(L, I1, EL_2, OUT_1),
 	replace(OUT_1, I2, EL_1, OUT).
 
+slice_list(L, C_POS, END_POS, OUT):-
+	C_POS =:= END_POS,
+	OUT = [].
+
+slice_list(L, C_POS, END_POS, OUT):-
+	nth0(C_POS, L, CURRENT),
+	N_POS is (C_POS + 1),
+	slice_list(L, N_POS, END_POS, PARTIAL),
+	OUT = [CURRENT | PARTIAL].
+
